@@ -3,9 +3,8 @@ package com.example.restdocs.member;
 
 import com.example.restdocs.common.ControllerTest;
 import com.example.restdocs.member.model.dto.request.MemberJoinRequest;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import com.example.restdocs.member.model.dto.request.MemberUpdateRequest;
+import org.junit.jupiter.api.*;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 
@@ -15,7 +14,6 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.pr
 import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
 import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 public class MemberControllerTest extends ControllerTest {
 
     @BeforeEach
@@ -29,6 +27,8 @@ public class MemberControllerTest extends ControllerTest {
 
         memberService.save(request);
 
+        System.out.println("BeforeEach Stared");
+
     }
 
     @Test
@@ -36,7 +36,7 @@ public class MemberControllerTest extends ControllerTest {
     void Success_join() throws Exception {
 
         MemberJoinRequest request = MemberJoinRequest.builder()
-                                                    .id("victoryddh5")
+                                                    .id("victoryddh")
                                                     .password("1234")
                                                     .name("도하")
                                                     .build();
@@ -57,4 +57,29 @@ public class MemberControllerTest extends ControllerTest {
 
     }
 
+    @Test
+    @DisplayName("비밀번호 변경")
+    void update_member() throws Exception {
+
+        MemberUpdateRequest request = MemberUpdateRequest.builder()
+                                                                        .id("victoryddh")
+                                                                        .password("updatePassword")
+                                                                        .build();
+
+
+        mockMvc.perform(RestDocumentationRequestBuilders.put("/api/member/update")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(objectMapper.writeValueAsBytes(request)))
+                .andDo(
+                        document("member/update",
+                                preprocessRequest(prettyPrint()),
+                                requestFields(
+                                        fieldWithPath("id").description("회원 아이디"),
+                                        fieldWithPath("password").description("변경할 비밀번호")
+                                )
+                        )
+                )
+                .andExpect(status().isOk());
+
+    }
 }

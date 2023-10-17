@@ -21,3 +21,14 @@ include::{snippets}/member/join/request-fields.adoc[]
 
 == Response Code
 include::{snippets}/member/join/http-response.adoc[]
+
+== Request Code
+include::{snippets}/member/update/http-request.adoc[]
+
+== Request-PathParam 요청에 필요한 PathParam
+include::{snippets}/member/update/request-body.adoc[]
+
+include::{snippets}/member/update/request-fields.adoc[]
+
+== Response Code
+include::{snippets}/member/update/http-response.adoc[]

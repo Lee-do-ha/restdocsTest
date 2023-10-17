@@ -1,6 +1,8 @@
 package com.example.restdocs.member.controller;
 
 import com.example.restdocs.member.model.dto.request.MemberJoinRequest;
+import com.example.restdocs.member.model.dto.request.MemberUpdateRequest;
+import com.example.restdocs.member.model.entity.Member;
 import com.example.restdocs.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -32,10 +34,19 @@ public class MemberController {
 
     }
 
-    @GetMapping("/detail/{memberId}")
-    public ResponseEntity<?> detail(@PathVariable("memberId") Long memberId){
+    @GetMapping("/detail/{id}")
+    public ResponseEntity<Member> detail(@PathVariable("id") String id){
 
-        return ResponseEntity.ok(memberService.findByMemberId(memberId));
+        return ResponseEntity.ok(memberService.findById(id));
+
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Member> update(@RequestBody MemberUpdateRequest request){
+
+        memberService.update(request);
+
+        return ResponseEntity.ok(memberService.findById(request.getId()));
 
     }
 
