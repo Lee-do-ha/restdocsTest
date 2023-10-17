@@ -11,13 +11,13 @@ ifndef::snippets[]
 :snippets: ./build/generated-snippets
 endif::[]
 
-=== Request Code
+== Request Code
 include::{snippets}/member/join/http-request.adoc[]
 
-=== Request-PathParam 요청에 필요한 PathParam
+== Request-PathParam 요청에 필요한 PathParam
 include::{snippets}/member/join/request-body.adoc[]
 
 include::{snippets}/member/join/request-fields.adoc[]
 
-=== Response Code
+== Response Code
 include::{snippets}/member/join/http-response.adoc[]
