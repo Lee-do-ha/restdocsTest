@@ -5,6 +5,7 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 src/docs/asciidoc/**
+.html
 
 ### STS ###
 .apt_generated
